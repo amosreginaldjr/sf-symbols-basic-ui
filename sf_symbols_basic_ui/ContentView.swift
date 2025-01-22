@@ -9,75 +9,70 @@ import SwiftUI
 
 struct ContentView: View
 {
-    //@State var ttoggle: Bool = false
-    let sf_icons: [String] = ["person.circle", "person.circle.fill",                         "figure.walk", "figure.run",
-                            "plus.circle", "plus.circle.fill"]
-    @State private var icon: String = "drop.halffull"
+    @State private var icon: String = "drop.halffull" //default
+    let sf_icons: [String] = ["person.circle", "person.circle.fill",                                "figure.walk", "figure.run",
+                              "plus.circle", "plus.circle.fill"]
     
+    @State private var color: Color = .gray //default
     let colors: [Color] = [.red, .blue, .yellow, .green,
                            .pink, .black, .orange, .purple]
-    @State private var color: Color = .gray
+    
+    //private var user_preffered_icons = [0]
     
     @State private var counter: Int = 0
     
+    private let uniform_radius: CGFloat = 20
+    
+    private let user_tapped: String = "DEFAULT"
+    
+    
+    
     var body: some View
     {
-        HStack
+        VStack(alignment: HorizontalAlignment.center)
         {
-//            Image(systemName: icon)
-//                //.resizable()
-//                .font(.system(size: 100, weight: .regular))
-//                .foregroundColor(color)
-//                .onTapGesture(count: 1) {
-//                    icon = sf_icons[counter]
-//                    color = colors[counter]
-//                    
-//                    counter += 1
-//                    
-//                    print(counter)
-//                    if (counter == sf_icons.endIndex)
-//                    {
-//                        counter = 0
-//                    }
-//                }
-            
-            
+            Text("Select your preferred icon")
+                .font(.title)
+                .frame(width: 335, height: 40)
+                .background(.gray)
+                .foregroundColor(.white)
+                .cornerRadius(uniform_radius)
+                .padding(.bottom, 400)
+        }//end of VStack
+        
+        
+        HStack(alignment: VerticalAlignment.center)
+        {
             SpawnImage(icon: sf_icons[counter], color: colors[counter], counter: counter)
-                .onTapGesture(count: 1) {
-                    icon = sf_icons[counter]
-                    color = colors[counter]
-            
-                    counter += 1
-            
-                    print(counter)
-                    if (counter == sf_icons.endIndex)
-                    {
-                        counter = 0
-                    }
-                }
-            
+                
+            SpawnImage(icon: sf_icons[counter + 1], color: colors[counter + 1], counter: counter + 1)
         }
+        .padding(.bottom, 200)
+//        .onTapGesture(count: 1)
+//        {
+//            //print(icon)
+//
+//            icon = sf_icons[counter]
+//            color = colors[counter]
+//    
+//            counter += 2
+//    
+//            print(counter)
+//            if (counter == sf_icons.endIndex)
+//            {
+//                counter = 0
+//            }
+        }//end of HStack
+        
+        
     }
 }
 
 func SpawnImage(icon: String, color: Color, counter: Int) -> some View
 {
     Image(systemName: icon)
-        //.resizable()
         .font(.system(size: 100, weight: .regular))
         .foregroundColor(color)
-//        .onTapGesture(count: 1) {
-//            icon = sf_icons[counter]
-//            color = colors[counter]
-//            
-//            counter += 1
-//            
-//            print(counter)
-//            if (counter == sf_icons.endIndex)
-//            {
-//                counter = 0
-//            }
-//         }
 }
  
 
