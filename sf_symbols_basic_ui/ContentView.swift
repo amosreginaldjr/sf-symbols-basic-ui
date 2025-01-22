@@ -17,7 +17,7 @@ struct ContentView: View
     let colors: [Color] = [.red, .blue, .yellow, .green,
                            .pink, .black, .orange, .purple]
     
-    //private var user_preffered_icons = [0]
+    @State var user_preffered_icons: [Bool] = [] //stores the icons that the user prefers !!!!!!!!!!still need to make it so that it saves the data for when the app is opened!!!!!!!!!!!!!
     
     @State private var counter: Int = 0
     
@@ -44,24 +44,49 @@ struct ContentView: View
         HStack(alignment: VerticalAlignment.center)
         {
             SpawnImage(icon: sf_icons[counter], color: colors[counter], counter: counter)
+                .padding(.bottom, 200)
+                .onTapGesture(count: 1)
+            {
+                user_preffered_icons.append(true) //
+                if (user_preffered_icons.last == true)
+                {
+                    print("left")
+                }
                 
+                icon = sf_icons[counter]
+                color = colors[counter]
+                
+                counter += 2
+                
+                if (IsEndOfArray(counter: counter, terminating_total: 3))
+                {
+                    //END OF ARRAY DETECTED
+                }
+            }
+            
+            
             SpawnImage(icon: sf_icons[counter + 1], color: colors[counter + 1], counter: counter + 1)
-        }
-        .padding(.bottom, 200)
-//        .onTapGesture(count: 1)
-//        {
-//            //print(icon)
-//
-//            icon = sf_icons[counter]
-//            color = colors[counter]
-//    
-//            counter += 2
-//    
-//            print(counter)
-//            if (counter == sf_icons.endIndex)
-//            {
-//                counter = 0
-//            }
+                .padding(.bottom, 200)
+                .onTapGesture(count: 1)
+            {
+                user_preffered_icons.append(false)
+                if (user_preffered_icons.last == false)
+                {
+                    print("right")
+                }
+                
+                icon = sf_icons[counter]
+                color = colors[counter]
+                
+                counter += 2
+                
+                //print(counter)
+
+                if (IsEndOfArray(counter: counter, terminating_total: 3))
+                {
+                    //END OF ARRAY DETECTED
+                }
+            }
         }//end of HStack
         
         
@@ -73,6 +98,17 @@ func SpawnImage(icon: String, color: Color, counter: Int) -> some View
     Image(systemName: icon)
         .font(.system(size: 100, weight: .regular))
         .foregroundColor(color)
+}
+
+func IsEndOfArray(counter: Int, terminating_total: Int/*, sf_icons: [String], colors: [Color]*/) -> Bool
+{
+    //if (counter == sf_icons.endIndex && counter == colors.endIndex)
+    if (counter >= terminating_total)
+    {
+        print("end of the array")
+        return true
+    }
+    return false
 }
  
 
