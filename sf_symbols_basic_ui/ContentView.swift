@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View
 {
     @State private var icon: String = "drop.halffull" //default
-    let sf_icons: [String] = ["person.circle", "person.circle.fill",                                "figure.walk", "figure.run",
+    let sf_icons: [String] = ["person.circle", "person.circle.fill",                                    "figure.walk", "figure.run",
                               "plus.circle", "plus.circle.fill"]
     
     @State private var color: Color = .gray //default
@@ -24,7 +24,6 @@ struct ContentView: View
     private let uniform_radius: CGFloat = 20
     
     private let user_tapped: String = "DEFAULT"
-    
     
     
     var body: some View
@@ -58,10 +57,10 @@ struct ContentView: View
                 
                 counter += 2
                 
-                if (IsEndOfArray(counter: counter, terminating_total: 3))
-                {
-                    //END OF ARRAY DETECTED
-                }
+//                if (!IsEndOfArray(counter: counter, terminating_total: sf_icons.endIndex))
+//                {
+//                    SpawnImage(icon: sf_icons[counter], color: colors[counter], counter: counter).hidden()
+//                }
             }
             
             
@@ -79,17 +78,13 @@ struct ContentView: View
                 color = colors[counter]
                 
                 counter += 2
-                
-                //print(counter)
-
-                if (IsEndOfArray(counter: counter, terminating_total: 3))
-                {
-                    //END OF ARRAY DETECTED
-                }
             }
+            
+//            if (!IsEndOfArray(counter: counter, terminating_total: sf_icons.endIndex))
+//            {
+//                SpawnImage(icon: sf_icons[counter + 1], color: colors[counter + 1], counter: counter + 1).hidden()
+//            }
         }//end of HStack
-        
-        
     }
 }
 
@@ -100,17 +95,17 @@ func SpawnImage(icon: String, color: Color, counter: Int) -> some View
         .foregroundColor(color)
 }
 
-func IsEndOfArray(counter: Int, terminating_total: Int/*, sf_icons: [String], colors: [Color]*/) -> Bool
+func IsEndOfArray(counter: Int, terminating_total: Int) -> Bool
 {
     //if (counter == sf_icons.endIndex && counter == colors.endIndex)
     if (counter >= terminating_total)
     {
         print("end of the array")
-        return true
+        return false
     }
-    return false
+    return true
 }
- 
+
 
 #Preview
 {
